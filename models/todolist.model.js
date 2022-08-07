@@ -8,8 +8,7 @@ class Todo {
   }
 
   static async getAll() {
-      const todos = await db.getDb().collection("todos").find().toArray();
-      console.log(todos)
+    const todos = await db.getDb().collection("todos").find().toArray();
     return todos.map(function (todo) {
       return new Todo(todo.text, todo._id);
     });
@@ -17,16 +16,13 @@ class Todo {
 
   save() {
     if (this.id) {
-        const todoId = new mongodb.ObjectId(this.id);
-        console.log(0);
+      const todoId = new mongodb.ObjectId(this.id);
       return db
         .getDb()
         .collection("todos")
         .updateOne({ _id: todoId }, { $set: { text: this.text } });
     } else {
-        console.log(1)
-        return db.getDb().collection("todos").insertOne({ text: this.text });
-        
+      return db.getDb().collection("todos").insertOne({ text: this.text });
     }
   }
 

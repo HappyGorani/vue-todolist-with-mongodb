@@ -28,6 +28,7 @@ async function saveTodo(req, res, next) {
   res.json({
     message: "todo saved",
     savedTodo: todo,
+    savedId: createdId,
   });
 }
 async function updateTodo(req, res, next) {
@@ -40,7 +41,7 @@ async function updateTodo(req, res, next) {
     next(error);
     return;
   }
-  res.josn({
+  res.json({
     message: "todo updated",
     updatedTodo: todo,
   });
