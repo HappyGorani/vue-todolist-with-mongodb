@@ -16,7 +16,7 @@ async function getAllData(req, res, next) {
 async function saveTodo(req, res, next) {
   const todoText = req.body.text;
   const todo = new TodolistModel(todoText);
-  let insertedId;
+  let createdId;
   try {
     const result = await todo.save();
     createdId = result.insertedId;
