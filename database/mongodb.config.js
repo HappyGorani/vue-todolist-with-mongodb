@@ -4,7 +4,7 @@ const MongoClient = mongodb.MongoClient;
 let database;
 
 async function initDb() {
-  const client = await MongoClient.connect("mongodb://172.7.0.5:27017");
+  const client = await MongoClient.connect("mongodb://172.27.0.5:27017");
   // const client = await MongoClient.connect("mongodb://127.0.0.1:27017");
   database = client.db("todolist-with-Vue");
 }

@@ -2,15 +2,16 @@ const mongodb = require("mongodb");
 const db = require("../database/mongodb.config");
 
 class Todo {
-  constructor(text, id) {
+  constructor(text, id, time) {
     this.text = text;
     this.id = id;
+    this.time = time;
   }
 
   static async getAll() {
     const todos = await db.getDb().collection("todos").find().toArray();
     return todos.map(function (todo) {
-      return new Todo(todo.text, todo._id);
+      return new Todo(todo.text, todo._id, todo.time);
     });
   }
 
@@ -20,9 +21,15 @@ class Todo {
       return db
         .getDb()
         .collection("todos")
-        .updateOne({ _id: todoId }, { $set: { text: this.text } });
+        .updateOne(
+          { _id: todoId },
+          { $set: { text: this.text, time: this.time } }
+        );
     } else {
-      return db.getDb().collection("todos").insertOne({ text: this.text });
+      return db
+        .getDb()
+        .collection("todos")
+        .insertOne({ text: this.text, time: this.time });
     }
   }
 

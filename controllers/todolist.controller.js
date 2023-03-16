@@ -14,8 +14,9 @@ async function getAllData(req, res, next) {
   });
 }
 async function saveTodo(req, res, next) {
+  const todoTime = req.body.time;
   const todoText = req.body.text;
-  const todo = new TodolistModel(todoText);
+  const todo = new TodolistModel(todoText, "", todoTime);
   let createdId;
   try {
     const result = await todo.save();
@@ -32,9 +33,10 @@ async function saveTodo(req, res, next) {
   });
 }
 async function updateTodo(req, res, next) {
+  const todoTime = req.body.time;
   const todoText = req.body.text;
   const todoId = req.params.id;
-  const todo = new TodolistModel(todoText, todoId);
+  const todo = new TodolistModel(todoText, todoId, todoTime);
   try {
     await todo.save();
   } catch (error) {
